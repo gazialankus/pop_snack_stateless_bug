@@ -12,3 +12,11 @@ Here's what to do to reproduce this bug:
 If you don't focus the TextField, this won't happen. 
 
 Using `Builder` instead of `GlobalKey` to get to the `Scaffold` did not help. 
+
+## The Fix
+
+Turns out the problem was storing the `GlobalKey` inside a `StatelessWidget`. The StatelessWidget gets recreated and we get a new GlobalKey instance. Later we try to use the old instance to access the snack bar, which fails. 
+
+Flutter does not enforce not having any fields in `StatelessWidget`s. You have to enforce it yourself, otherwise you create weird bugs like this.
+
+I just checked and there is no linter rule for this. I wish linter could warn if we use a GlobalKey field in a StatelessWidget.  

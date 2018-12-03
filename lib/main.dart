@@ -44,13 +44,20 @@ class Page1 extends StatelessWidget {
 }
 
 
-class Page2 extends StatelessWidget {
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+class Page2 extends StatefulWidget {
+  @override
+  Page2State createState() {
+    return new Page2State();
+  }
+}
+
+class Page2State extends State<Page2> {
+//  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>(debugLabel: "TE SCAFFOLD KEY");
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _scaffoldKey,
+//      key: _scaffoldKey,
       body: Builder(
         builder: (BuildContext context2) {
           return SafeArea(
@@ -62,7 +69,9 @@ class Page2 extends StatelessWidget {
                     return Page3();
                   }
                 ));
-                _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text(msg)));
+//                _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text(msg)));
+                // using context instead of context2 would also fail.
+                Scaffold.of(context2).showSnackBar(SnackBar(content: Text(msg)));
               },
             ),
           );

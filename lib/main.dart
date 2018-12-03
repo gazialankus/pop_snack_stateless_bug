@@ -20,12 +20,9 @@ class MyApp extends StatelessWidget {
 }
 
 class Page1 extends StatelessWidget {
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _scaffoldKey,
       body: Builder(
         builder: (BuildContext context2) {
           return SafeArea(
@@ -84,7 +81,7 @@ class Page3 extends StatelessWidget {
           children: <Widget>[
             TextField(),
             RaisedButton(
-              child: Text("If tap the TextField above before you push me, the bug will manifest."),
+              child: Text("If you tap the TextField above before you push me, the bug will manifest."),
               onPressed: () {
                 Navigator.pop(context, "hello");
               },

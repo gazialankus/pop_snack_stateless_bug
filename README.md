@@ -6,7 +6,9 @@ I have three StatelessWidget instances that I travel through with Navigator.push
 
 Here's what to do to reproduce this bug:
 1. Press the button twice to get to the third page, which contains a TextField and a Button.
-2. Write something in that text field and hit that button.
+2. Tap that text field to focus it and hit that button.
 3. Surprise! Only then _scaffoldKey.currentState becomes null and we get `04:38:57.385 25 info flutter.tools NoSuchMethodError: The getter 'className' was called on null.`
 
-Making the last widget (`Page3`) stateful fixes this.
+If you don't focus the TextField, this won't happen. 
+
+Using `Builder` instead of `GlobalKey` to get to the `Scaffold` did not help. 
